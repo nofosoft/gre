@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Octokit } from "@octokit/rest";
 
-const TOKEN = "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";
+const TOKEN = "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";
 
 function App() {
   const [typingKeys, setTypingKeys] = useState<string>("");
