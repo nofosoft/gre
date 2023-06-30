@@ -110,8 +110,8 @@ function App() {
   useEffect(() => {
     // console.log(userFound);
     setUserFound(username.length);
-    username.map((user, idx) => {
-      repos.map((repo, idx) => {
+    username.map((user) => {
+      repos.map((repo) => {
         if (user.username == repo.username) {
           // console.log(user.username + ":" + repo.repos);
         }
