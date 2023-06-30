@@ -8,7 +8,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Octokit } from "@octokit/rest";
 
 const TOKEN = process.env.GIT_TOKEN;
-//console.log(TOKEN);
+// console.log(TOKEN);
 
 export default function Home() {
   const [typingKeys, setTypingKeys] = useState<string>("");
