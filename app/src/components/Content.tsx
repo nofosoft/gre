@@ -45,33 +45,6 @@ const Content = ({
                 {repos.map((repo: any) => {
                   if (repos.length !== 0 && user.username === repo.username) {
                     return (
-                      // <div key={repo.id} className="p-1">
-                      //   <div className="stats w-full">
-                      //     <div className="stat">
-                      //       <div className="stat-title font-bold whitespace-normal">
-                      //         {repo.repos}
-                      //       </div>
-                      //       <div className="stat-desc whitespace-normal">
-                      //         {repo.desc}
-                      //       </div>
-
-                      //       <div className="stat-figure">
-                      //         <i className="fa-solid fa-star"></i>
-                      //         <span className="stat-desc ml-2">
-                      //           {repo.rate}
-                      //         </span>
-                      //         <i className="fa-solid fa-user ml-2"></i>
-                      //         <span className="stat-desc ml-2">
-                      //           {repo.watchers}
-                      //         </span>
-                      //       </div>
-
-                      //       <div className="stat-desc whitespace-normal">
-                      //         [ {repo.lang} ]
-                      //       </div>
-                      //     </div>
-                      //   </div>
-                      // </div>
                       <div
                         key={repo.id}
                         className="card w-full bg-base-100 my-1 shadow-xl"
