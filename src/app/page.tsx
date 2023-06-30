@@ -1,4 +1,5 @@
-import "./App.css";
+"use client";
+
 import Heading from "./components/Heading";
 import Content from "./components/Content";
 import { useEffect, useState } from "react";
@@ -6,10 +7,10 @@ import { useEffect, useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Octokit } from "@octokit/rest";
 
-const TOKEN = import.meta.env.VITE_TOKEN;
-// console.log(TOKEN);
+const TOKEN = process.env.GIT_TOKEN;
+//console.log(TOKEN);
 
-function App() {
+export default function Home() {
   const [typingKeys, setTypingKeys] = useState<string>("");
   const [typingKeysTemp, setTypingKeysTemp] = useState<string>("");
   const [userFound, setUserFound] = useState<number>(0);
@@ -133,7 +134,6 @@ function App() {
       clearInterval(intervalId); // Cleanup the interval on component unmount
     };
   }, [typingKeys, typingKeysTemp]);
-
   return (
     <>
       <Heading
@@ -149,5 +149,3 @@ function App() {
     </>
   );
 }
-
-export default App;
