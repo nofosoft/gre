@@ -6,55 +6,27 @@ import { useEffect, useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Octokit } from "@octokit/rest";
 
+const TOKEN = "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";
+
 function App() {
   const [typingKeys, setTypingKeys] = useState<string>("");
-  const [dataUsers, setDataUsers] = useState({
-    title: "Data users",
-    data: [
-      {
-        id: 1,
-        username: "arhscrypt",
-        repos: [
-          {
-            id: 1,
-            name: "scanme",
-            desc: "this is description of repositories",
-            rate: 20,
-          },
-          {
-            id: 2,
-            name: "github",
-            desc: "this is description of repositories",
-            rate: 13,
-          },
-        ],
-      },
-      {
-        id: 2,
-        username: "jajangcode",
-        repos: [
-          {
-            id: 1,
-            name: "scanme",
-            desc: "this is description of repositories",
-            rate: 13,
-          },
-          {
-            id: 2,
-            name: "github",
-            desc: "this is description of repositories",
-            rate: 11,
-          },
-          {
-            id: 3,
-            name: "asdjaf",
-            desc: "this is description of repositories",
-            rate: 9,
-          },
-        ],
-      },
-    ],
-  });
+
+  interface userObj {
+    id: number;
+    username: any;
+  }
+  const [username, setUsername] = useState<userObj[]>([]);
+  interface repoObj {
+    id: number;
+    username: any;
+    repos: any;
+    url: any;
+    desc: any;
+    lang: any;
+    rate: number;
+    watchers: number;
+  }
+  const [repos, setRepos] = useState<repoObj[]>([]);
 
   const onHandleTypeing = (event: any) => {
     // console.log(event.target.value);
@@ -62,20 +34,14 @@ function App() {
   };
 
   const onHandleSearch = async () => {
-    // console.log("onHandleSearch");
+    console.log("search for " + typingKeys);
     getUsernameData(typingKeys);
   };
-
-  interface userObj {
-    id: number;
-    name: any;
-  }
-  const [username, setUsername] = useState<userObj[]>([]);
 
   const getUsernameData = async (keywords: string) => {
     setUsername([]);
     const octokit = new Octokit({
-      auth: "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",
+      auth: TOKEN,
     });
     const {
       data: {},
@@ -92,9 +58,10 @@ function App() {
         if (idx < 5) {
           const newObject: userObj = {
             id: idx,
-            name: item.login,
+            username: item.login,
           };
           setUsername((prevState) => [...prevState, newObject]);
+          getReposData(item.login);
         }
       });
     } catch (error) {
@@ -102,16 +69,10 @@ function App() {
     }
   };
 
-  interface repoObj {
-    id: number;
-    repos: any;
-  }
-  const [repos, setRepos] = useState<repoObj[]>([]);
-
   const getReposData = async (keywords: string) => {
     setRepos([]);
     const octokit = new Octokit({
-      auth: "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",
+      auth: TOKEN,
     });
     const {
       data: {},
@@ -125,9 +86,16 @@ function App() {
 
       const details = response.data;
       details.map((items: any, idx: number) => {
+        console.log(items);
         const newObject: repoObj = {
           id: idx,
+          username: keywords,
           repos: items.name,
+          url: items.clone_url,
+          desc: items.description,
+          lang: items.language,
+          rate: items.stargazers_count,
+          watchers: items.watchers,
         };
         setRepos((prevState) => [...prevState, newObject]);
       });
@@ -137,12 +105,12 @@ function App() {
   };
 
   useEffect(() => {
-    username.map((item, idx) => {
-      console.log(item);
-      getReposData(item.name);
-    });
-    repos.map((item, idx) => {
-      console.log(item);
+    username.map((user, idx) => {
+      repos.map((repo, idx) => {
+        if (user.username == repo.username) {
+          // console.log(user.username + ":" + repo.repos);
+        }
+      });
     });
   }, [username, repos]);
 
@@ -152,7 +120,12 @@ function App() {
         onHandleTypeing={onHandleTypeing}
         onHandleSearch={onHandleSearch}
       />
-      <Content search={typingKeys} founded={0} dataUsers={dataUsers} />
+      <Content
+        search={typingKeys}
+        founded={0}
+        usernames={username}
+        repos={repos}
+      />
     </>
   );
 }

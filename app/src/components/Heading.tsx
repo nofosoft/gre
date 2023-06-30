@@ -9,10 +9,10 @@ const Heading = ({
   onHandleTypeing,
   onHandleSearch,
 }: HeadingProps): ReactElement => {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("dark");
 
   const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
+    setTheme(theme === "light" ? "dark" : "light");
   };
 
   // initially set the theme and "listen" for changes to apply them to the HTML tag
@@ -21,7 +21,7 @@ const Heading = ({
   }, [theme]);
 
   return (
-    <div className="navbar bg-base-200">
+    <div className="navbar bg-base-200 py-2">
       <input
         type="text"
         placeholder="Type here"

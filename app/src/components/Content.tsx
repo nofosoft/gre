@@ -3,13 +3,15 @@ import { ReactElement } from "react";
 type ContentProps = {
   search: string;
   founded: number;
-  dataUsers: any;
+  usernames: any;
+  repos: any;
 };
 
 const Content = ({
   search,
   founded,
-  dataUsers,
+  usernames,
+  repos,
 }: ContentProps): ReactElement => {
   //   dataUsers.data.map((list: any) => console.log(list));
 
@@ -32,29 +34,82 @@ const Content = ({
         false
       )}
       <div className="p-2">
-        {dataUsers.data.map((items: any) => {
+        {usernames.map((user: any) => {
           return (
-            <div key={items.id} className="collapse bg-base-200 my-1">
+            <div key={user.id} className="collapse bg-base-200 my-1">
               <input type="checkbox" />
               <div className="collapse-title text-xl font-medium">
-                {items.username}
+                {user.username}
               </div>
               <div className="collapse-content">
-                {items.repos.map((items: any) => {
-                  return (
-                    <div key={items.id} className="p-1">
-                      <div className="stats w-full">
-                        <div className="stat">
-                          <div className="stat-title">{items.name}</div>
-                          <div className="stat-desc">{items.desc}</div>
-                          <div className="stat-figure">
-                            <i className="fa-solid fa-star"></i>
-                            <span className="stat-desc ml-2">{items.rate}</span>
+                {repos.map((repo: any) => {
+                  if (repos.length !== 0 && user.username === repo.username) {
+                    return (
+                      // <div key={repo.id} className="p-1">
+                      //   <div className="stats w-full">
+                      //     <div className="stat">
+                      //       <div className="stat-title font-bold whitespace-normal">
+                      //         {repo.repos}
+                      //       </div>
+                      //       <div className="stat-desc whitespace-normal">
+                      //         {repo.desc}
+                      //       </div>
+
+                      //       <div className="stat-figure">
+                      //         <i className="fa-solid fa-star"></i>
+                      //         <span className="stat-desc ml-2">
+                      //           {repo.rate}
+                      //         </span>
+                      //         <i className="fa-solid fa-user ml-2"></i>
+                      //         <span className="stat-desc ml-2">
+                      //           {repo.watchers}
+                      //         </span>
+                      //       </div>
+
+                      //       <div className="stat-desc whitespace-normal">
+                      //         [ {repo.lang} ]
+                      //       </div>
+                      //     </div>
+                      //   </div>
+                      // </div>
+                      <div
+                        key={repo.id}
+                        className="card w-full bg-base-100 my-1 shadow-xl"
+                      >
+                        <div className="card-body">
+                          <div className="card-actions justify-between">
+                            <h2 className="card-title whitespace-normal">
+                              {repo.repos}
+                            </h2>
+                            <div className="card-actions justify-end">
+                              <div className="stat-figure">
+                                <i className="fa-solid fa-star"></i>
+                                <span className="stat-desc ml-2">
+                                  {repo.rate}
+                                </span>
+                                <i className="fa-solid fa-user ml-2"></i>
+                                <span className="stat-desc ml-2">
+                                  {repo.watchers}
+                                </span>
+                                <button className="btn ml-2 btn-ghost">
+                                  <a
+                                    className="whitespace-normal"
+                                    href={repo.url}
+                                    target="_blank"
+                                  >
+                                    <i className="fa-solid fa-download"></i>
+                                  </a>
+                                </button>
+                              </div>
+                            </div>
                           </div>
+
+                          <p className="whitespace-normal">{repo.desc}</p>
+                          <p className="whitespace-normal">[ {repo.lang} ]</p>
                         </div>
                       </div>
-                    </div>
-                  );
+                    );
+                  }
                 })}
               </div>
             </div>
