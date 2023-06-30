@@ -34,7 +34,7 @@ function App() {
   };
 
   const onHandleSearch = async () => {
-    console.log("search for " + typingKeys);
+    // console.log("search for " + typingKeys);
     getUsernameData(typingKeys);
   };
 
@@ -86,7 +86,7 @@ function App() {
 
       const details = response.data;
       details.map((items: any, idx: number) => {
-        console.log(items);
+        // console.log(items);
         const newObject: repoObj = {
           id: idx,
           username: keywords,
