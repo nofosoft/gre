@@ -32,8 +32,12 @@ const Heading = ({
         <i className="fa-solid fa-magnifying-glass fa-xl"></i>
       </button>
       <div className="mx-2">
-        <i className="fa-solid fa-circle-half-stroke"></i>
-        <input type="checkbox" onClick={toggleTheme} className="toggle  mx-2" />
+        <i className="fa-solid ml-2 fa-circle-half-stroke"></i>
+        <input
+          type="checkbox"
+          onClick={toggleTheme}
+          className="toggle border-0 mx-2"
+        />
       </div>
     </div>
   );

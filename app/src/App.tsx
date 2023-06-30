@@ -6,10 +6,13 @@ import { useEffect, useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Octokit } from "@octokit/rest";
 
-const TOKEN = "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";
+const TOKEN = import.meta.env.VITE_TOKEN;
+// console.log(TOKEN);
 
 function App() {
   const [typingKeys, setTypingKeys] = useState<string>("");
+  const [typingKeysTemp, setTypingKeysTemp] = useState<string>("");
+  const [userFound, setUserFound] = useState<number>(0);
 
   interface userObj {
     id: number;
@@ -105,6 +108,8 @@ function App() {
   };
 
   useEffect(() => {
+    // console.log(userFound);
+    setUserFound(username.length);
     username.map((user, idx) => {
       repos.map((repo, idx) => {
         if (user.username == repo.username) {
@@ -112,7 +117,22 @@ function App() {
         }
       });
     });
-  }, [username, repos]);
+  }, [username, repos, userFound]);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      // Call your function here
+      // console.log("typeing: " + typingKeys);
+      if (typingKeys != typingKeysTemp) {
+        getUsernameData(typingKeys);
+      }
+      setTypingKeysTemp(typingKeys);
+    }, 1000); // 1000 milliseconds = 1 second
+
+    return () => {
+      clearInterval(intervalId); // Cleanup the interval on component unmount
+    };
+  }, [typingKeys, typingKeysTemp]);
 
   return (
     <>
@@ -122,7 +142,7 @@ function App() {
       />
       <Content
         search={typingKeys}
-        founded={0}
+        founded={userFound}
         usernames={username}
         repos={repos}
       />
