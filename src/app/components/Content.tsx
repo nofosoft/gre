@@ -20,7 +20,8 @@ const Content = ({
       {search.length > 0 ? (
         <div className="p-4">
           <div>
-            Showing users for <span className="stat-title">"{search}"</span>
+            Showing users for{" "}
+            <span className="stat-title">&quot;{search}&quot;</span>
           </div>
           <div>
             {founded > 0 ? (
