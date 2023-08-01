@@ -43,11 +43,14 @@ const Content = ({
               <summary className="collapse-title text-xl font-medium">
                 {user.username}
               </summary>
-              <div className="collapse-content">
+              <div className="collapse-content bg-base-200">
                 {repos.map((repo: any) => {
                   if (repos.length !== 0 && user.username === repo.username) {
                     return (
-                      <div className="bg-base-200" key={repo.id}>
+                      <div
+                        className="bg-base-100 p-1 rounded-box my-1"
+                        key={repo.id}
+                      >
                         <div className="p-2 flex justify-between">
                           <div>
                             <span>
