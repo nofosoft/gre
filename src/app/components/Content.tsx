@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, use, useEffect } from "react";
 
 type ContentProps = {
   search: string;
@@ -14,6 +14,8 @@ const Content = ({
   repos,
 }: ContentProps): ReactElement => {
   //   dataUsers.data.map((list: any) => console.log(list));
+
+  useEffect(() => {}, [usernames, repos]);
 
   return (
     <>
@@ -37,52 +39,52 @@ const Content = ({
       <div className="p-2">
         {usernames.map((user: any) => {
           return (
-            <div key={user.id} className="collapse bg-base-200 my-1">
-              <input type="checkbox" />
-              <div className="collapse-title whitespace-normal text-xl font-medium">
+            <details key={user.id} className="collapse my-1 bg-base-200">
+              <summary className="collapse-title text-xl font-medium">
                 {user.username}
-              </div>
+              </summary>
               <div className="collapse-content">
                 {repos.map((repo: any) => {
                   if (repos.length !== 0 && user.username === repo.username) {
                     return (
-                      <div className="card p-2 my-2 bg-base-100" key={repo.id}>
-                        <div className="flex justify-between p-2">
-                          <div className="flex justify-between">
-                            <div>
+                      <div className="bg-base-200" key={repo.id}>
+                        <div className="p-2 flex justify-between">
+                          <div>
+                            <span>
                               <i className="fa-solid fa-star"></i>
                               <span className="stat-desc ml-2">
                                 {repo.rate}
                               </span>
-                            </div>
-                            <div>
+                            </span>
+                            <span>
                               <i className="fa-solid fa-user ml-2"></i>
                               <span className="stat-desc ml-2">
                                 {repo.watchers}
                               </span>
-                            </div>
+                            </span>
                           </div>
                           <div>
-                            <a href={repo.url} target="_blank">
-                              <i className="fa-solid fa-download"></i>
-                            </a>
+                            <span>
+                              <a href={repo.url} target="_blank">
+                                <i className="fa-solid fa-download"></i>
+                              </a>
+                            </span>
                           </div>
                         </div>
-                        <div className="rounded p-2 w-[300px] sm:w-full text-orange-600 font-bold whitespace-normal">
+
+                        <p className="p-2 text-orange-600 font-bold">
                           {repo.repos}
-                        </div>
-                        <div className="bg-base-200 w-100 rounded p-2 whitespace-normal">
-                          {repo.desc}
-                          <div className="whitespace-normal">
-                            [ {repo.lang} ]
-                          </div>
-                        </div>
+                        </p>
+                        <p className="p-2">{repo.desc}</p>
+                        <p className="p-2">[ {repo.lang} ]</p>
                       </div>
                     );
+                  } else {
+                    return false;
                   }
                 })}
               </div>
-            </div>
+            </details>
           );
         })}
       </div>
