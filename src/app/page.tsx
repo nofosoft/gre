@@ -133,7 +133,7 @@ export default function Home() {
     return () => {
       clearInterval(intervalId); // Cleanup the interval on component unmount
     };
-  }, [typingKeys, typingKeysTemp]);
+  });
   return (
     <>
       <Heading
