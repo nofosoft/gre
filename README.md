@@ -12,15 +12,38 @@ API docs URL: https://developer.github.com/v3/
 
 ## ------------------------------------------------
 
-# Project Title
+# GitHub Repositories Explorer
 
-Simple overview of use/purpose.
+GitHub Repositories Explorer or GRE is a react application which integrates with github.com API and allows user to search for up to 5 users with a username similar to the value entered in text input.
 
 ## Description
 
-An in-depth paragraph about your project and overview of use.
+This application which integrates with github.com API and allows user to search for up
+to 5 users with a username similar to the value entered in text input and then on click display repositories
+(no limit on displayed repositories amount) for selected GitHub user.
+
+API docs URL: https://developer.github.com/v3/
 
 ## Getting Started
+
+- Download the from the repositories or this link [https://github.com/arhscrypt/gre.git] for the project.
+- Install the dependencies
+
+```
+npm install
+```
+
+- build the project
+
+```
+npm run build
+```
+
+- start project and open on yout browser
+
+```
+npm start
+```
 
 ### Dependencies
 
